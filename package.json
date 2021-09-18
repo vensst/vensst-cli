@@ -1,7 +1,7 @@
 {
   "name": "@vensst/cli",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "快速搭建前端项目脚手架",
   "bin": {
     "vensst": "./bin/vensst.js"
