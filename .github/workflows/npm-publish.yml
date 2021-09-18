@@ -1,0 +1,44 @@
+# 工作流名称，不设置的话默认取配置文件名
+name: npm-publish
+
+# 触发部署的条件 当 master 分支, 有 push 的操作, 即可触发。
+on:
+  # 在推或拉请求事件上触发工作流，但仅用于主分支
+  push:
+    tags:
+      - 'v*'
+    #branches: # 此处不仅限于监听分支, 还可监听 tag
+     # - master
+# 一个工作流运行由一个或多个任务组成，这些任务可以顺序地或并行地运行
+jobs:
+  # 任务名称
+  build-and-publish-npm:
+    # 任务运行的容器类型（虚拟机环境）
+    runs-on: ubuntu-latest
+    # 任务执行的步骤
+    steps:
+
+      # 步骤名称
+      - name: Checkout
+        #使用的操作 actions，可以使用公共仓库，本地仓库，别人的仓库的action
+        # 拉取代码
+        uses: actions/checkout@master
+
+      # 打包构建
+      - name: Build
+        uses: actions/setup-node@master
+      - run: npm install
+      - run: npm run lib
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      # npm ERR! 402 Payment Required - PUT https://registry.npmjs.org/@vensst/vue-widget - You must sign up for private packages
+      # @xxx/xxxx   npm会认为要发布私包，私包需要收费，需将发布命令改成： npm publish --access public
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
+
+
+
