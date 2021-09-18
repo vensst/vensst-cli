@@ -12,7 +12,7 @@ on:
 # 一个工作流运行由一个或多个任务组成，这些任务可以顺序地或并行地运行
 jobs:
   # 任务名称
-  build-and-publish-npm:
+  publish-npm:
     # 任务运行的容器类型（虚拟机环境）
     runs-on: ubuntu-latest
     # 任务执行的步骤
@@ -22,15 +22,9 @@ jobs:
       - name: Checkout
         #使用的操作 actions，可以使用公共仓库，本地仓库，别人的仓库的action
         # 拉取代码
-        uses: actions/checkout@master
-
-      # 打包构建
-      - name: Build
-        uses: actions/setup-node@master
-      - run: npm install
-      - run: npm run lib
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+        uses: actions/checkout@v2
+      - name: setup-node
+        uses: actions/setup-node@v1
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
