@@ -11,8 +11,10 @@ vensst create-vue-mobile-template <projectName>
 vensst cvmt <projectName>
 ```
 ## 更新
+2022-01-04
+* 修改README.md
 
 2021-09-18
-* 增加基于vue移动端模版
+* 增加vue移动端项目模版
 
 
