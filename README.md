@@ -7,8 +7,7 @@ npm install -g @vensst/cli
 ## 使用
 ```
 vensst create <projectName>
-或
-vensst cvmt <projectName>
+
 ```
 ## 更新
 2022-01-27
