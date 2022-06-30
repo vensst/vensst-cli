@@ -16,7 +16,9 @@
   "keywords": [
     "vensst",
     "cli",
-    "vue"
+    "vue",
+    "vue-cli",
+    "vue项目脚手架"
   ],
   "author": "vensst",
   "license": "MIT",
