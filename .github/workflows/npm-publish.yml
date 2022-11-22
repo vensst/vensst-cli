@@ -13,24 +13,25 @@ on:
 jobs:
   # 任务名称
   publish-npm:
-    # 任务运行的容器类型（虚拟机环境）
+    # 任务运行的计算机类型（虚拟机环境）
     runs-on: ubuntu-latest
     # 任务执行的步骤
     steps:
-
       # 步骤名称
       - name: Checkout
-        #使用的操作 actions，可以使用公共仓库，本地仓库，别人的仓库的action
+        # 使用的操作 actions，可以使用公共仓库，本地仓库，别人的仓库的action
         # 拉取代码
         uses: actions/checkout@v2
       - name: setup-node
         uses: actions/setup-node@v1
+        # 参数
         with:
-          node-version: 14
+          node-version: 16
           registry-url: https://registry.npmjs.org/
       # npm ERR! 402 Payment Required - PUT https://registry.npmjs.org/@vensst/vue-widget - You must sign up for private packages
       # @xxx/xxxx   npm会认为要发布私包，私包需要收费，需将发布命令改成： npm publish --access public
-      - run: npm publish --access public
+      - name: publish-npm
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
