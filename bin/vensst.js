@@ -11,16 +11,17 @@ process.env.NODE_PATH = __dirname + '/../node_modules/'
 const {version} = require("../package.json")
 
 
+// .option()方法来定义选项，同时可以附加选项的简介
+program
+  .version(version, '-v, --version', '输出vensst-cli版本')
+  .option("-h, --help", '显示命令帮助')
+  .option("-i, --init <projectName>", '初始化项目')
 
 program
-  .version(version,'-v, --version','输出vensst-cli版本')
-  .option("-h, --help",'显示命令帮助')
-
-program
-  .command('create <projectName>')
+  .command('create [projectType]')
   .description('创建一个项目模版')
-  .action((projectName) =>{
-    require("../lib/create")(projectName)
+  .action((projectType) => {
+    require("../lib/create")(projectType)
   })
 
 
